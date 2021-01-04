@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegisterController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/register", name="register")
      */
     
     public function index(Request $request, UserPasswordEncoderInterface $userPasswordEncoder): Response
@@ -25,11 +25,9 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $rp = $this->getDoctrine()->getManager();
             $user->setPassword($userPasswordEncoder->encodePassword($user, $form['password']->getData()));
-            $user->setBanido('false');
-            $user->setRoles(['ROLE_USER']);
             $rp->persist($user);
             $rp->flush();
-            $this->addFlash('success', 'Usuário registrado com sucesso!');
+            $this->addFlash('success', User::SUCCESS_REGISTER);
             return $this->redirectToRoute("home");
         }
 

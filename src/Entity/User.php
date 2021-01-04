@@ -12,6 +12,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+
+   public function __construct()
+   {
+       $this->banido = 'false';
+       $this->roles = ['ROLE_USER'];
+   }
+
+    const SUCCESS_REGISTER = "Usuário inserido com sucesso!";
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
