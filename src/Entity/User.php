@@ -60,6 +60,11 @@ class User implements UserInterface
      */
     private $profissao;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Posts",mappedBy="user")
+     */
+    private $posts;
+
 
     public function getId(): ?int
     {
@@ -144,6 +149,11 @@ class User implements UserInterface
         $this->banido = $profissao;
 
         return $this;
+    }
+
+    public function getPosts(): ?string
+    {
+        return $this->posts;
     }
 
 

@@ -3,13 +3,37 @@
 namespace App\Entity;
 
 use App\Repository\PostsRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use IntlDateFormatter;
 
 /**
  * @ORM\Entity(repositoryClass=PostsRepository::class)
  */
 class Posts
 {
+
+    const SUCCESS_POST = 'Postagem inserida com sucesso!';
+
+    public function __construct()
+    {
+        $this->likes= '';
+        $this->data_post= $this->dateGenerate();
+    }
+
+    public function dateGenerate()
+    {
+        $date = new DateTime();
+        $formatter = new IntlDateFormatter(
+        'en',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::NONE,
+            'America/Sao_Paulo',          
+            IntlDateFormatter::GREGORIAN
+        );
+        return $formatter->format($date);
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -28,12 +52,12 @@ class Posts
     private $likes;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $foto;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
     private $data_post;
 
@@ -47,6 +71,11 @@ class Posts
      * @ORM\OneToMany(targetEntity="App\Entity\Comentarios", mappedBy="posts")
      */
     private $comentarios;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User",inversedBy="posts")
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -89,7 +118,7 @@ class Posts
         return $this;
     }
 
-    public function getDataPost(): ?\DateTimeInterface
+    public function getDataPost()
     {
         return $this->data_post;
     }
@@ -111,5 +140,27 @@ class Posts
         $this->content = $content;
 
         return $this;
+    }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getComentarios(): ?string
+    {
+        return $this->comentarios;
+    }
+
+    public function setComentarios(string $comentarios): ?string
+    {
+        return $this->comentarios = $comentarios;
     }
 }
