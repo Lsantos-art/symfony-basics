@@ -1,9 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-out.html.twig' %}
 
-{% block title %}Hello RegisterController!{% endblock %}
+{% block title %}Registrar-se no sistema{% endblock %}
 
 {% block body %}
 
-    {{ form(form)  }}
+    
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-6 bg-white rounded my-3 p-5 border border-dark">
+                {{ form(form)  }}
+            </div>
+        </div>
+    </div>
 
+    
 {% endblock %}

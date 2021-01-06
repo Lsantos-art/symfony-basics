@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Linha do tempo{% endblock %}
+{% block title %}Minhas postagens{% endblock %}
 
 {% block body %}
 
 <div class="example-wrapper">
-    <h1><i class="fab fa-facebook"></i>Fake Book</h1>
-    <a href="{{  path('new-post') }}" class="btn btn-outline-primary my-3">Nova postagem</a>
-    <a href="{{  path('my-posts') }}" class="btn btn-outline-secondary my-3">Minhas postagens</a> <br>
+    <h1>Minhas postagens</h1>
+    <a href="{{  path('new-post') }}" class="btn btn-success my-3">Novo post</a> <br>
 
     <table class="table">
         <tr>
@@ -29,7 +28,7 @@
             <td>
                 <img src="{{ asset('/uploads/uploaded_img/') }}{{ post.foto }}" alt="{{ post.foto }}" class="img-thumbnail" style="max-width:100px;">
             </td>
-            <td>{{ post.data_post}}</td>
+            <td>{{ post.datapost}}</td>
         </tr>
     {% endfor %}
     </table>

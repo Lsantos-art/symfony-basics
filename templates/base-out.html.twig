@@ -8,26 +8,13 @@
         <script src="https://kit.fontawesome.com/377e21cca3.js" crossorigin="anonymous"></script>
         {% endblock %}
     </head>
-    <body>
+    <body class="bg-light">
+
         <!-- As a link -->
         <nav class="navbar navbar-light bg-info">
             <div class="row p-3 ml-3 text-white">
-                <a class="navbar-brand" href="{{ path('dashboard') }}">
-                     <p class="text-white h4">Fake Book</p>
-                </a>
-            </div>
-
-            <!-- Default dropleft button -->
-            <div class="btn-group dropleft">
-                <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <i class="fab fa-facebook text-white"></i>
-                </button>
-                <div class="dropdown-menu mr-2">
-                    <a class="dropdown-item" href="{{ path('my-posts') }}">Minhas postagens</a>
-                    <a class="dropdown-item" href="{{ path('dashboard') }}">Linha do tempo</a>
-                    <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
-                </div>
-                </div>
+                <span><a class="navbar-brand" href="{{ path('home') }}"><i class="fab fa-facebook text-white"></i></a></span>
+                <h3 class="">Fake Book</h3>
             </div>
         </nav>
 
