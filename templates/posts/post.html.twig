@@ -3,7 +3,7 @@
 {% block title %}Detalhes da postagem{% endblock %}
 
 {% block body %}
-
+{% set likesOfThatPost = post.likes | split(',') %}
 <div class="d-flex justify-content-center mb-3">
     <div class="">
 
@@ -11,15 +11,34 @@
             <h1>{{ post.titulo  }}</h1>
         </div>
         <hr>
-        
+        <div class="">
+            <a class="text-primary btn" onclick="like({{ post.id }})">
+                {% if app.user.id in likesOfThatPost %}
+                    <i class="fas fa-thumbs-up"></i>
+                {% else %}
+                    <i class="far fa-thumbs-up"></i>
+                {% endif %}
+            </a>
+        </div>
         <div class="p-2">
-            <h5 class="text-primary"># Likes</h5>
             <img src="{{ asset('/uploads/uploaded_img/') }}{{ post.foto }}" alt="{{ post.foto }}" class="img-thumbnail">
             <div class="mt-3">{{ post.content  }}</div>
             <cite class="text-muted">{{ post.datapost  }}</cite>            
+        </div> 
+
+        <div class="p-2">
+            {{ form(form)  }}
         </div>
 
     </div>
 </div>
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('js/ajax-call.js') }}"></script>
+{% endblock %}
 
 {% endblock %}

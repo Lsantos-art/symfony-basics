@@ -66,4 +66,14 @@ class Comentarios
 
         return $this;
     }
+
+    public function getPosts(): ?string
+    {
+        return $this->posts;
+    }
+
+    public function setPosts(string $posts): ?string
+    {
+        return $this->posts = $posts;
+    }
 }
