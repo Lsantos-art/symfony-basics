@@ -72,6 +72,7 @@ class PostsController extends AbstractController
      */
     public function postDetail($id, Request $request)
     {
+        $user = $this->getUser();
         $comentarios = new Comentarios();
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Posts::class)->find($id);
@@ -79,8 +80,17 @@ class PostsController extends AbstractController
         $form = $this->createForm(CommentsType::class, $comentarios);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comentarios->setPosts($post);
+            $comentarios->setUser($user);
+            $em->persist($comentarios);
+            $em->flush();
+        }
+        $comments = $em->getRepository(Comentarios::class)->findBy(['posts' => $post]);
+
         return $this->render('posts/post.html.twig', [
             'post' => $post,
+            'comments' => $comments,
             'form' => $form->createView()
         ]);
     }

@@ -24,7 +24,15 @@
             <img src="{{ asset('/uploads/uploaded_img/') }}{{ post.foto }}" alt="{{ post.foto }}" class="img-thumbnail">
             <div class="mt-3">{{ post.content  }}</div>
             <cite class="text-muted">{{ post.datapost  }}</cite>            
-        </div> 
+        </div>
+
+        {% for comment in comments %}
+        <div class="p-2 bg-light my-3 border border-dark">
+            <small>{{ comment.user.id  }} - {{ comment.datapublicacao }}</small>
+            <hr>
+            <h6>{{ comment.comentario  }}</h6>
+        </div>
+        {% endfor %}
 
         <div class="p-2">
             {{ form(form)  }}

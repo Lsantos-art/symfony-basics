@@ -3,13 +3,34 @@
 namespace App\Entity;
 
 use App\Repository\ComentariosRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use IntlDateFormatter;
 
 /**
  * @ORM\Entity(repositoryClass=ComentariosRepository::class)
  */
 class Comentarios
 {
+    public function __construct()
+    {
+        $this->likes= '';
+        $this->data_publicacao= $this->dateGenerate();
+    }
+
+    public function dateGenerate()
+    {
+        $date = new DateTime(); 
+        $formatter = new IntlDateFormatter(
+        'en',
+            IntlDateFormatter::FULL, 
+            IntlDateFormatter::NONE,
+            'America/Sao_Paulo',          
+            IntlDateFormatter::GREGORIAN
+        );
+        return $formatter->format($date);
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -23,7 +44,7 @@ class Comentarios
     private $comentario;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     private $data_publicacao;
 
@@ -55,7 +76,7 @@ class Comentarios
         return $this;
     }
 
-    public function getDataPublicacao(): ?\DateTimeInterface
+    public function getDataPublicacao()
     {
         return $this->data_publicacao;
     }
@@ -72,8 +93,23 @@ class Comentarios
         return $this->posts;
     }
 
-    public function setPosts(string $posts): ?string
+    public function setPosts($posts): self
     {
-        return $this->posts = $posts;
+        $this->posts = $posts;
+
+        return $this;
+    }
+
+    public function getUser()
+    {
+        $this->user;
+        return $this;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

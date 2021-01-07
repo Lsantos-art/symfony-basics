@@ -22,19 +22,19 @@ class ComentariosRepository extends ServiceEntityRepository
     // /**
     //  * @return Comentarios[] Returns an array of Comentarios objects
     //  */
-    /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.user_id = :val')
             ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Comentarios
